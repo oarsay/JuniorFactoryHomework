@@ -715,6 +715,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   countText: {fileID: 273461476}
   fellow: {fileID: 5331840397611577681, guid: 580a896e173ac534481eb323bc2cde9e, type: 3}
+  distanceFactor: 0.4
+  radius: 1
+  duration: 1
 --- !u!54 &1311694477
 Rigidbody:
   m_ObjectHideFlags: 0
