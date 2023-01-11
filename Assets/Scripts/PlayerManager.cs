@@ -16,7 +16,7 @@ public class PlayerManager : MonoBehaviour
     // FELLOW ORGANIZATION
     [Range(0f, 1f)] [SerializeField] private float distanceFactor, radius, duration = 1f;
 
-    public bool fight;
+    public bool isFight;
 
 
     void Start()
@@ -28,10 +28,7 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
-        if(fight)
-        {
 
-        }
     }
 
     private void SpawnFellows(int neededFellowNum)
@@ -72,7 +69,8 @@ public class PlayerManager : MonoBehaviour
         {
             enemy = other.transform;
             Debug.Log("position " + enemy.position);
-            fight = true;
+            isFight = true;
+            other.transform.GetChild(2).GetComponent<EnemyManager>().Attack(transform);
         }
     }
 

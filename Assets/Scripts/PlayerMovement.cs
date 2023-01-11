@@ -9,9 +9,11 @@ public class PlayerMovement : MonoBehaviour
     public float playerSpeed;
     private Camera camera;
     private float leftBoundary = -5f, rightBoundary = 5f;
-    private float rotationSpeed = 1f;
+    private float rotationSpeed = 3f;
+    [SerializeField] private float playerSpeedOnAttack;
 
     private PlayerManager playerManager;
+    [SerializeField] private Transform enemy;
 
     void Start()
     {
@@ -21,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if(playerManager.fight)
+        if(playerManager.isFight)
         {
             var enemyDirection = new Vector3(playerManager.enemy.position.x, transform.position.y, playerManager.enemy.position.z) - transform.position;
 
@@ -31,6 +33,10 @@ public class PlayerMovement : MonoBehaviour
             //for(int i = 1; i < transform.childCount; i++)
             //    transform.GetChild(i).rotation = Quaternion.Slerp(transform.GetChild(i).rotation, Quaternion.LookRotation(enemyDirection, Vector3.up), Time.deltaTime * 3f);
             
+            if(enemy.childCount > 0)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, enemy.position, playerSpeedOnAttack * Time.deltaTime);
+            }
 
         }
         else

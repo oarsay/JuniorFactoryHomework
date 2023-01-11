@@ -8,9 +8,15 @@ public class EnemyManager : MonoBehaviour
 
     [SerializeField] private TextMeshPro countText;
     [SerializeField] private GameObject enemy;
+    private Transform target;
+    [SerializeField] private PlayerManager playerManager;
+    [SerializeField] private float enemySpeedOnAttack;
+    private float rotationSpeed = 3f;
 
     // ENEMY ORGANIZATION
     [Range(0f, 1f)] [SerializeField] private float distanceFactor, radius, duration = 1f;
+
+    
 
     void Start()
     {
@@ -26,7 +32,15 @@ public class EnemyManager : MonoBehaviour
 
     void Update()
     {
-        
+        if(playerManager.isFight && transform.childCount > 0)
+        {
+            var targetDirection = new Vector3(target.position.x, transform.position.y, target.position.z) - transform.position;
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(targetDirection, Vector3.up), Time.deltaTime * rotationSpeed);
+
+            transform.position = Vector3.MoveTowards(transform.position, target.position, enemySpeedOnAttack * Time.deltaTime);
+            
+        }
     }
 
     private void OrganizeEnemies()
@@ -38,6 +52,16 @@ public class EnemyManager : MonoBehaviour
             var newPosition = new Vector3(x, -0.5f, z);
 
             transform.transform.GetChild(i).localPosition = newPosition;
+        }
+    }
+
+    public void Attack(Transform player)
+    {
+        target = player;
+
+        for(int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).GetComponent<Animator>().SetBool("run", true);
         }
     }
 }

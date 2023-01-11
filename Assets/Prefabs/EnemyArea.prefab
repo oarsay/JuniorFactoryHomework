@@ -231,6 +231,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   countText: {fileID: 5808507472482931880}
   enemy: {fileID: 5331840397611577681, guid: 7fc91ae33b01e614b80b17899edc2e11, type: 3}
+  playerManager: {fileID: 0}
+  enemySpeedOnAttack: 0
   distanceFactor: 0.5
   radius: 0.825
   duration: 1
