@@ -7,6 +7,8 @@ using DG.Tweening;
 public class PlayerManager : MonoBehaviour
 {
     private Transform player;
+    public Transform enemy;
+    private PlayerMovement playerMovement;
     private int currentFellowNum;
     [SerializeField] private TextMeshPro countText;
     [SerializeField] private GameObject fellow;
@@ -14,11 +16,22 @@ public class PlayerManager : MonoBehaviour
     // FELLOW ORGANIZATION
     [Range(0f, 1f)] [SerializeField] private float distanceFactor, radius, duration = 1f;
 
+    public bool fight;
+
 
     void Start()
     {
+        playerMovement = transform.GetComponent<PlayerMovement>();
         player = transform;
         UpdateFellowNumber();
+    }
+
+    void Update()
+    {
+        if(fight)
+        {
+
+        }
     }
 
     private void SpawnFellows(int neededFellowNum)
@@ -54,6 +67,12 @@ public class PlayerManager : MonoBehaviour
             currentFellowNum = newFellowNum;
 
             SpawnFellows(neededFellowNum);
+        }
+        else if(other.CompareTag("Enemy"))
+        {
+            enemy = other.transform;
+            Debug.Log("position " + enemy.position);
+            fight = true;
         }
     }
 
