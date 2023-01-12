@@ -40,13 +40,13 @@ SkinnedMeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5331840397611577489}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
   m_RayTracingMode: 3
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
@@ -1427,6 +1427,7 @@ GameObject:
   - component: {fileID: 5331840397602079441}
   - component: {fileID: 5331840398824756748}
   - component: {fileID: 5331840398824756749}
+  - component: {fileID: 5962104937214845156}
   m_Layer: 0
   m_Name: Character
   m_TagString: Blue
@@ -1501,6 +1502,18 @@ CapsuleCollider:
   m_Height: 1.78
   m_Direction: 1
   m_Center: {x: 0, y: 0.91, z: 0}
+--- !u!114 &5962104937214845156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5331840397611577681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d599a43e0b69d04ca435a366fb23795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5331840397611577683
 GameObject:
   m_ObjectHideFlags: 0

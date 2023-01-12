@@ -65,12 +65,15 @@ public class PlayerManager : MonoBehaviour
 
             SpawnFellows(neededFellowNum);
         }
-        else if(other.CompareTag("Enemy"))
+        else if(other.CompareTag("EnemyArea"))
         {
             enemy = other.transform;
-            Debug.Log("position " + enemy.position);
             isFight = true;
             other.transform.GetChild(2).GetComponent<EnemyManager>().Attack(transform);
+        }
+        else if(other.CompareTag("Enemy"))
+        {
+            Debug.Log("COLLIDED WITH ENEMY!");
         }
     }
 
@@ -81,7 +84,7 @@ public class PlayerManager : MonoBehaviour
         {
             var x = distanceFactor * Mathf.Sqrt(i) * Mathf.Cos(i * radius);
             var z = distanceFactor * Mathf.Sqrt(i) * Mathf.Sin(i * radius);
-            var newPosition = new Vector3(x, -0.5f, z);
+            var newPosition = new Vector3(x, 0f, z);
 
             player.transform.GetChild(i).DOLocalMove(newPosition, duration).SetEase(Ease.OutBack);
         }

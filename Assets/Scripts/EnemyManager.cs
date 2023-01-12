@@ -34,12 +34,8 @@ public class EnemyManager : MonoBehaviour
     {
         if(playerManager.isFight && transform.childCount > 0)
         {
-            var targetDirection = new Vector3(target.position.x, transform.position.y, target.position.z) - transform.position;
-
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(targetDirection, Vector3.up), Time.deltaTime * rotationSpeed);
-
-            transform.position = Vector3.MoveTowards(transform.position, target.position, enemySpeedOnAttack * Time.deltaTime);
-            
+            Rotate();
+            Move();
         }
     }
 
@@ -49,10 +45,22 @@ public class EnemyManager : MonoBehaviour
         {
             var x = distanceFactor * Mathf.Sqrt(i) * Mathf.Cos(i * radius);
             var z = distanceFactor * Mathf.Sqrt(i) * Mathf.Sin(i * radius);
-            var newPosition = new Vector3(x, -0.5f, z);
+            var newPosition = new Vector3(x, 0f, z);
 
             transform.transform.GetChild(i).localPosition = newPosition;
         }
+    }
+
+    private void Rotate()
+    {
+        var targetDirection = transform.position - new Vector3(target.position.x, transform.position.y, target.position.z);
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(targetDirection, Vector3.up), Time.deltaTime * rotationSpeed);
+    }
+
+    private void Move()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, target.position, enemySpeedOnAttack * Time.deltaTime);
     }
 
     public void Attack(Transform player)
